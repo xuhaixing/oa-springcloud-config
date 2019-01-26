@@ -1,0 +1,32 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: eureka-service
+  profiles:
+    active: dev
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+
+---
+spring:
+  profiles: dev
+eureka:
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 60000
+
+---
+spring:
+    profiles: test
+eureka:
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 60000
